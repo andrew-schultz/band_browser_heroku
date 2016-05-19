@@ -1,0 +1,233 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Avenir';
+}
+
+#head {
+	width: 250px;
+	padding-left: 25px;
+	display: inline-block;
+	margin-right: 5px;
+	z-index: 23;
+}
+
+#head h1 {
+	margin-bottom: 0px;
+}
+
+#head p {
+	margin-top: 0px;
+	margin-bottom: 2px;
+}
+
+#search {
+	padding: 3px;
+	font-size: 15px;
+}
+
+#name  {
+	display: inline-block;
+	opacity: 0.9;
+	text-shadow: 1px;
+	text-align: center;
+	width: 61%;
+	font-size: 50px;
+	z-index: 5;
+	position: relative;
+	/*vertical-align: top;*/
+	margin-top: 15px;
+	padding-bottom: 30px;
+}
+
+#name a {
+	color: #000000;
+	text-decoration: none;
+}
+
+#band_info {
+	padding: 0;
+	margin-top: 0px;
+	z-index: -1;
+}
+
+#image {
+	height: 600px;
+	margin: 0 auto;
+	position: relative;
+}
+
+#image img {
+
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+#left {
+	position: absolute;
+	z-index: 21;
+	/*background-color: #ffffff;*/
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 10px;
+	padding-top: 0px;
+	padding-left: 25px;
+	top: 120px;
+	/*top: 55%;
+	transform: translateY(-45%);*/
+	width: 250px;
+}
+
+#g_title {
+	margin-bottom: 0px;
+}
+
+#genres {
+	list-style: none;
+	padding-left: 10px;
+	margin-top: 5px;
+}
+
+#nowPlaying {
+	
+}
+
+#npTitle {
+	margin-bottom: 5px;
+}
+
+#play {
+
+}
+
+#right {
+	position: absolute;
+	right: 0;
+	width: 250px;
+	z-index: 2;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding-right: 20px;
+	top: 17vh;
+	overflow: scroll;
+	top: 25px;
+}
+
+#ra_title {
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+#ra {
+	list-style: none;
+	margin-top: 5px;
+	padding-left: 5px;
+}
+
+.sm_circle {
+	width: 60px;
+	height: 60px;
+	border: 1px solid #ffffff;
+	border-radius: 50%;
+	vertical-align: center;
+}
+
+.follower_text {
+	padding: 10px;
+	height: 60px;
+	position: relative;
+	border-bottom: 1px solid rgba(0,0,0,0.1)
+}
+
+.follower_text span {
+	vertical-align: middle;
+	/*line-height: 70px;*/
+	position: absolute;
+	display: inline-block;
+	padding-left: 10px;
+	top: 40%;
+}
+
+.black {
+	background-color: #000000;
+	opacity: 0.6;
+}
+
+#albums {
+	margin: 0 auto;
+	width: 80%;
+	padding-top: 100px;
+	background-color: #ffffff;
+	z-index: 20;
+	position: relative;
+}
+
+.album {
+	width: 300px;
+	vertical-align: top;
+	/*margin: 0 auto;*/
+	display: inline-block;
+	margin-left: 29px;
+	margin-right: 29px;
+	margin-bottom: 20px;
+	border: 1px solid rgba(0,0,0,0.3);
+}
+
+.album p {
+	padding: 5px;
+}
+
+#tracks {
+	list-style: none;
+	padding-left: 10px;
+	margin-top: 5px;
+}
+
+.track_text {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+@media all and (max-width: 1349px) and (min-width: 1175px) {
+	#albums {
+		width: 80%;
+	}
+}
+
+@media all and (max-width: 1174px) and (min-width: 1080px) {
+	#albums {
+		width: 100%;
+	}
+}
+
+@media all and (max-width: 1079px) and (min-width: 960px) {
+	#albums {
+		width: 80%;
+		margin: 0 auto;
+		padding-top: 100px;
+	}
+}
+
+@media all and (max-width: 959px) and (min-width: 720px) {
+	#albums {
+		width: 100%;
+		margin: 0 auto;
+		padding-top: 100px;
+	}
+}
+
+@media all and (max-width: 719px) and (min-width: 480px) {
+	#albums {
+		width: 100%;
+		margin: 0 auto;
+		padding-top: 100px;
+	}
+
+	.album {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+}
+
