@@ -181,6 +181,8 @@ $(document).ready(function(){
 	var gen_tracks = function(x){
 		clear_tracks();
 		$('#tt_title').text("Top Tracks");
+		$('#tt_subtitle').text("select a song to listen")
+
 		var tracks = x.tracks;
 		for(var t = 0; t < tracks.length; t++){
 			$('#tracks').append("<li class='track_text' data-track="+tracks[t].uri+">"+tracks[t].name+"</li>")

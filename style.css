@@ -90,6 +90,15 @@ body {
 	margin-top: 5px;
 }
 
+#tt_title {
+	margin-bottom: 0px;
+}
+
+#tt_subtitle {
+	margin-top: 1px;
+	margin-bottom: 5px;
+}
+
 #nowPlaying {
 	
 }
