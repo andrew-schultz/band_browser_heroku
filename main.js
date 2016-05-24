@@ -19,9 +19,9 @@ $(document).ready(function(){
 				// console.log(response);
 				update(response)
 				var id = response.artists.items[0].id;
-				get_related(id)
 				get_albums(id)
 				get_tracks(id)
+				get_related(id)
 			}
 		});
 
@@ -74,8 +74,15 @@ $(document).ready(function(){
 		var url = artist.external_urls.spotify;
 		var followers = artist.followers.total;
 		var popularity = artist.popularity;
+
 		
-		$('#name').html("<a href=" + url + ">" + name + "</a></h1>");
+		$('#name').html("<a id='nameA' href=" + url + ">" + name + "</a></h1>");
+
+		var nameWidth = $('#nameA').width();
+		console.log(nameWidth);
+
+		$('#name').css({'width' : nameWidth + "px"});
+
 		$('#followers').text("Followers: " + followers);
 		$('#popularity').text("Popularity: " + popularity);
 		$('#g_title').text("Genres");
@@ -84,18 +91,6 @@ $(document).ready(function(){
 		for(var g=0; g < genres.length; g++){
 			$('#genres').append("<li>" + genres[g] + "</li>");
 		};
-
-		if(height > 700){
-			i += 1
-			console.log('big');
-			generate(artist, i);
-		}
-
-		if(window.innerWidth < 1199){
-			i += 1
-			console.log('wide');
-			generate(artist, i);
-		}
 
 		generate(artist, i);
 		
@@ -120,11 +115,24 @@ $(document).ready(function(){
 		var height = x.images[y].height;
 		var width = x.images[y].width;
 		var inHeight = window.innerHeight;
-		$('#image').css({'width': width + "px"});
+		console.log(inHeight);
+		// $('#image').css({'width': width + "px"});
 		// $('#image').css({'height': height + "px"});
+		// if(height > width){
+		// 	$('#image').css({'height' : '100%'});
+		// } else {
+		// 	$('#image').css({'width': '100%'});
+		// }
+
 		$('#image').html("<img src='" + image + "'></img>");
 		
-		$('#right').css({'height': inHeight - 25 + "px"});
+		if(window.innerWidth > 719){
+			$('#right').css({'height': inHeight + "px"});
+		};
+
+		if(height > inHeight){
+			pbackground();
+		}
 	};
 
 	var clear = function(){
@@ -166,11 +174,24 @@ $(document).ready(function(){
 		$('.follower_text').on('click', function(){
 			search($(this).text());
 		});
+
+		var lHeight = $('#left').height();
+		var hHeight = $('#head').height();
+		if(window.innerWidth > 719){
+			$('#right').css({'height' : lHeight + hHeight + 20 +"px"});
+		}
+		
+
 	};
 
 	var gen_albums = function(x){
 		clear_albums();
 		var albums = x.items;
+		var inHeight = document.documentElement.clientHeight
+		// var inHeight = window.innerHeight;
+		if(window.innerWidth > 719){
+			$('#albums').css({'margin-top' : inHeight + "px"})
+		}
 		for(var a = 0; a < albums.length; a++){
 			if((a > 1) && (albums[a].name != albums[a-1].name)){
 				$('#albums').append("<div class='album'><img class='album_art' src='" + albums[a].images[1].url + "'></img><p class='album_title'>"+ albums[a].name +"</p></div>");
@@ -182,7 +203,6 @@ $(document).ready(function(){
 		clear_tracks();
 		$('#tt_title').text("Top Tracks");
 		$('#tt_subtitle').text("select a song to listen")
-
 		var tracks = x.tracks;
 		for(var t = 0; t < tracks.length; t++){
 			$('#tracks').append("<li class='track_text' data-track="+tracks[t].uri+">"+tracks[t].name+"</li>")
@@ -197,6 +217,40 @@ $(document).ready(function(){
 		});
 	};
 
+	var inHeight = window.innerHeight;
+
+	$(window).on('resize', function(){
+		if(window.innerWidth < 719){
+			console.log('hello')
+			var imgHeight = $('#image').height();
+			var lHeight = $('#left').height();
+			var rHeight = $('#right').height();
+			console.log(imgHeight);
+			$('#left').css({'margin-top' : imgHeight + 25 + "px"})
+			$('#right').css({
+				'margin-top' : imgHeight + lHeight + 50 + "px",
+			})
+
+		}
+	});
+
+
+	//following code is referenced from http://www.javascriptkit.com/dhtmltutors/parallaxscrolling/ to create parallax effect
+	// Create cross browser requestAnimationFrame method:
+	
+
+	window.requestAnimationFrame = window.requestAnimationFrame
+
+	var back = document.getElementById('image').children;
+	console.log(back);
+	var scrolltop = window.pageYOffset
+	function pbackground(){
+		back[0].style.top = scrolltop * .2 + 'px'
+	}
+
+	window.addEventListener('scroll', function(){
+		requestAnimationFrame(pbackground)
+	}, false)
 
 
 });
