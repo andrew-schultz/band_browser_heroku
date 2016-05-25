@@ -16,7 +16,6 @@ $(document).ready(function(){
 				type: 'artist'
 			}, 
 			success: function(response){
-				// console.log(response);
 				update(response)
 				var id = response.artists.items[0].id;
 				get_albums(id)
@@ -30,7 +29,6 @@ $(document).ready(function(){
 				type: "GET",
 				url: "https://api.spotify.com/v1/artists/"+x+"/related-artists",
 				success: function(response){
-					// console.log(response);
 					gen_related(response);
 				}
 			});
@@ -41,7 +39,6 @@ $(document).ready(function(){
 				type: "GET",
 				url: "https://api.spotify.com/v1/artists/"+x+"/albums",
 				success: function(response){
-					// console.log(response);
 					gen_albums(response);
 				}
 			});
@@ -116,21 +113,11 @@ $(document).ready(function(){
 		var width = x.images[y].width;
 		var inHeight = window.innerHeight;
 		console.log(inHeight);
-		// $('#image').css({'width': width + "px"});
-		// $('#image').css({'height': height + "px"});
-		// if(height > width){
-		// 	$('#image').css({'height' : '100%'});
-		// } else {
-		// 	$('#image').css({'width': '100%'});
-		// }
-
 		$('#image').html("<img src='" + image + "'></img>");
 		
 		if(window.innerWidth > 719){
 			$('#right').css({'height': inHeight + "px"});
 		};
-
-		
 	};
 
 	var clear = function(){
@@ -159,9 +146,7 @@ $(document).ready(function(){
 
 	var gen_related = function(x){
 		clear_related();
-		// var height = x.images[y].height;
 		var related = x.artists;
-		// console.log(followers);
 		for(var g = 0; g < related.length; g++){
 			var last = related[g].images.length-1;
 			var sm_image = related[g].images[last].url;
@@ -175,18 +160,14 @@ $(document).ready(function(){
 
 		var lHeight = $('#left').height();
 		var hHeight = $('#head').height();
-		if(window.innerWidth > 719){
-			$('#right').css({'height' : lHeight + hHeight + 20 +"px"});
-		}
 		
-
+		$('#right').css({'height' : window.innerHeight +"px"});
 	};
 
 	var gen_albums = function(x){
 		clear_albums();
 		var albums = x.items;
 		var inHeight = document.documentElement.clientHeight
-		// var inHeight = window.innerHeight;
 		if(window.innerWidth > 719){
 			$('#albums').css({'margin-top' : inHeight + "px"})
 		}
@@ -226,29 +207,10 @@ $(document).ready(function(){
 			console.log(imgHeight);
 			$('#left').css({'margin-top' : imgHeight + 25 + "px"})
 			$('#right').css({
-				'margin-top' : imgHeight + lHeight + 50 + "px",
+				'margin-top' : imgHeight + lHeight + 50 + "px"
 			})
-
 		}
+		$('#right').css({'height' : window.innerHeight + "px"})
+
 	});
-
-
-	//following code is referenced from http://www.javascriptkit.com/dhtmltutors/parallaxscrolling/ to create parallax effect
-	// Create cross browser requestAnimationFrame method:
-	
-
-	window.requestAnimationFrame = window.requestAnimationFrame
-
-	var back = document.getElementById('image').children;
-	console.log(back);
-	var scrolltop = window.pageYOffset
-	function pbackground(){
-		back[0].style.top = scrolltop * .2 + 'px'
-	}
-
-	window.addEventListener('scroll', function(){
-		requestAnimationFrame(pbackground)
-	}, false)
-
-
 });
