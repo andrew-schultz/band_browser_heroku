@@ -130,9 +130,7 @@ $(document).ready(function(){
 			$('#right').css({'height': inHeight + "px"});
 		};
 
-		if(height > inHeight){
-			pbackground();
-		}
+		
 	};
 
 	var clear = function(){
