@@ -18,9 +18,11 @@ $(document).ready(function(){
 			success: function(response){
 				update(response)
 				var id = response.artists.items[0].id;
+				var name = response.artists.items[0].name;
 				get_albums(id)
 				get_tracks(id)
 				get_related(id)
+				// get_itunes(name)
 			}
 		});
 
@@ -54,6 +56,25 @@ $(document).ready(function(){
 				}
 			});
 		};
+
+		
+
+
+		// var get_itunes = function(x){
+		// 	var replaced = x.split(' ').join('+');
+		// 	console.log(replaced.toLowerCase())
+		// 	// var newReq = new XMLHttpRequest();
+		// 	// newReq.open('Get', "http://www.itunes.apple.com/search?term="+replaced.toLowerCase()+"");
+		// 	// newReq.send();
+		// 	$.ajax({
+		// 		type: 'GET',
+		// 		url: "https://www.itunes.apple.com/search?term="+replaced.toLowerCase()+"&callback={?}",
+		// 		success: function(response){
+		// 			console.log(response)
+		// 		}
+		// 	});
+		// }
+		
 	};
 
 	var update = function(x){
@@ -113,7 +134,7 @@ $(document).ready(function(){
 		var width = x.images[y].width;
 		var inHeight = window.innerHeight;
 		console.log(inHeight);
-		$('#image').html("<img src='" + image + "'></img>");
+		$('#image').html("<img id='pic' src='" + image + "'></img>");
 		
 		if(window.innerWidth > 719){
 			$('#right').css({'height': inHeight + "px"});
@@ -156,12 +177,9 @@ $(document).ready(function(){
 
 		$('.follower_text').on('click', function(){
 			search($(this).text());
-		});
+		});;
 
-		var lHeight = $('#left').height();
-		var hHeight = $('#head').height();
-		
-		$('#right').css({'height' : window.innerHeight +"px"});
+		resize();
 	};
 
 	var gen_albums = function(x){
@@ -198,19 +216,25 @@ $(document).ready(function(){
 
 	var inHeight = window.innerHeight;
 
-	$(window).on('resize', function(){
+	var resize = function(){
 		if(window.innerWidth < 719){
-			console.log('hello')
-			var imgHeight = $('#image').height();
+			console.log('hello');
+			var imgHeight = $('#pic').height();
 			var lHeight = $('#left').height();
 			var rHeight = $('#right').height();
+			var nHeight = $('#name').height();
 			console.log(imgHeight);
-			$('#left').css({'margin-top' : imgHeight + 25 + "px"})
-			$('#right').css({
-				'margin-top' : imgHeight + lHeight + 50 + "px"
-			})
-		}
-		$('#right').css({'height' : window.innerHeight + "px"})
+			$('#left').css({'margin-top' : imgHeight + nHeight + "px"});
 
+			$('#name').css({'top' : imgHeight + 98 + "px"});
+			$('#right').css({'height' : "100%"})
+		}
+		if(window.innerWidth > 719){
+			$('#right').css({'height' : window.innerHeight + "px"})
+		}
+	}
+
+	$(window).on('resize', function(){
+		resize()
 	});
 });
