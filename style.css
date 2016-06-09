@@ -168,7 +168,7 @@ body {
 #albums {
 	margin: 0 auto;
 	width: 80%;
-	padding-top: 100px;
+	/*padding-top: 100px;*/
 	background-color: rgba(255, 255, 255, 0.5);
 	z-index: 20;
 	position: relative;
@@ -176,6 +176,12 @@ body {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+}
+
+#albumT {
+	display: block;
+	width: 100%;
+	text-align: center;
 }
 
 .album {
@@ -217,14 +223,12 @@ body {
 	#albums {
 		width: 80%;
 		margin: 0 auto;
-		padding-top: 100px;
 	}
 }
 
 @media all and (max-width: 719px) and (min-width: 600px) {
 	#head {
 		width: 100%;
-
 	}
 }
 
