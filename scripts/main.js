@@ -7,7 +7,7 @@ $(document).ready(function(){
 		}
 	});
 
-	var search = function(query){
+	function search(query){
 		$.ajax({
 			type: "GET",
 			url: 'https://api.spotify.com/v1/search',
@@ -25,7 +25,7 @@ $(document).ready(function(){
 			}
 		});
 
-		var get_related = function(x){
+		function get_related(x){
 			$.ajax({
 				type: "GET",
 				url: "https://api.spotify.com/v1/artists/"+x+"/related-artists",
@@ -35,7 +35,7 @@ $(document).ready(function(){
 			});
 		};
 
-		var get_albums = function(x){
+		function get_albums(x){
 			$.ajax({
 				type: "GET",
 				url: "https://api.spotify.com/v1/artists/"+x+"/albums",
@@ -46,7 +46,7 @@ $(document).ready(function(){
 			});
 		};
 
-		var get_tracks = function(x){
+		function get_tracks(x){
 			$.ajax({
 				type: "GET",
 				url: "https://api.spotify.com/v1/artists/"+x+"/top-tracks?country=US",
@@ -58,7 +58,7 @@ $(document).ready(function(){
 		};
 	};
 
-	var update = function(x){
+	function update(x){
 		clear();
 		var i = 0
 		var artist = x.artists.items[0];
@@ -94,7 +94,7 @@ $(document).ready(function(){
 		generate(artist, i);
 	};
 
-	var generate = function(x, y){
+	function generate(x, y){
 		var image = x.images[y].url;
 		var height = x.images[y].height;
 		var width = x.images[y].width;
@@ -109,7 +109,7 @@ $(document).ready(function(){
 
 	var inHeight = window.innerHeight;
 
-	var resize = function(){
+	function resize(){
 		if(window.innerWidth < 719){
 			console.log('hello');
 			var imgHeight = $('#pic').height();
@@ -119,10 +119,14 @@ $(document).ready(function(){
 			$('#left').css({'margin-top' : imgHeight + nHeight+ "px"});
 			$('#name').css({'top' : imgHeight + 98 + "px"});
 			$('#right').css({'height' : "100%"})
+			$('#albums').css({'margin-top' : '0px'})
 		}
 
 		if(window.innerWidth > 719){
-			$('#right').css({'height' : window.innerHeight + "px"})
+			$('#right').css({'height' : window.innerHeight + "px"});
+			$('#left').css({'margin-top' : 0 + "px"});
+			$('#name').css({'top' : "0px"});
+			$('#albums').css({'margin-top' : inHeight + "px"})
 		}
 	}
 
@@ -130,31 +134,31 @@ $(document).ready(function(){
 		resize()
 	});
 
-	var clear = function(){
+	function clear(){
 		$('#genres').empty();
 		$('#ra').empty();
 		$('#albums').empty();
 		$('#tracks').empty();
 	};
 
-	var clear_related = function(){
+	function clear_related(){
 		$('#ra').empty();
 	}
 
-	var clear_albums = function(){
+	function clear_albums(){
 		$('#albums').empty();
 	}
 
-	var clear_tracks = function(){
+	function clear_tracks(){
 		$('#tracks').empty();
 	}
 
-	var clear_play = function(){
+	function clear_play(){
 		$('#npTitle').empty();
 		$('#play').empty();
 	}
 
-	var gen_related = function(x){
+	function gen_related(x){
 		clear_related();
 		var related = x.artists;
 		for(var g = 0; g < related.length; g++){
@@ -171,7 +175,7 @@ $(document).ready(function(){
 		resize();
 	};
 
-	var gen_albums = function(x){
+	function gen_albums(x){
 		clear_albums();
 		$('#albums').append("<h1 id='albumT'>Albums</h1>");
 		console.log(x);
@@ -196,7 +200,7 @@ $(document).ready(function(){
 		});
 	};
 
-	var gen_tracks = function(x){
+	function gen_tracks(x){
 		clear_tracks();
 		$('#tt_title').text("Top Tracks");
 		$('#tt_subtitle').text("select a song to listen")
@@ -214,32 +218,7 @@ $(document).ready(function(){
 		});
 	};
 
-	var show_album = function(x){
+	function show_album(x){
 		console.log(x);
-
-
 	};
-
-	var inHeight = window.innerHeight;
-
-	var resize = function(){
-		if(window.innerWidth < 719){
-			console.log('hello');
-			var imgHeight = $('#pic').height();
-			var lHeight = $('#left').height();
-			var rHeight = $('#right').height();
-			var nHeight = $('#name').height();
-			$('#left').css({'margin-top' : imgHeight + nHeight+ "px"});
-			$('#name').css({'top' : imgHeight + 98 + "px"});
-			$('#right').css({'height' : "100%"})
-		}
-
-		if(window.innerWidth > 719){
-			$('#right').css({'height' : window.innerHeight + "px"})
-		}
-	}
-
-	$(window).on('resize', function(){
-		resize()
-	});
 });

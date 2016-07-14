@@ -277,13 +277,7 @@ body {
 	}
 }
 
-@media all and (max-width: 719px) and (min-width: 600px) {
-	#head {
-		width: 100%;
-	}
-}
-
-@media all and (max-width: 599px) {
+@media all and (max-width: 719px) {
 	#albums {
 		/*margin-top: 0px;*/
 		width: 100%;
